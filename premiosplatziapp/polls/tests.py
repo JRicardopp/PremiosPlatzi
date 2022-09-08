@@ -6,9 +6,8 @@ from django.urls.base import reverse
 from django.utils import timezone
 from .models import Question
 
-# voy a testear Modelos y vista que es lo mas comun
-class QuestionModelTexts(TestCase): # es una clase que viene del modulo test de django que nos permite difinir una bateria de tests
-    # creamos un nombre descriptivo que sea facil de saber para que que el test 
+
+class QuestionModelTexts(TestCase):
     def test_was_published_recently_with_future_questions(self):
         """was_published_recently returs False for question whose pub_date in the future"""
         time = timezone.now() + datetime.timedelta(days= 30)
@@ -28,15 +27,6 @@ class QuestionModelTexts(TestCase): # es una clase que viene del modulo test de 
        past_question =  Question(question_text="¿Quien es el mejor Course Director en Platzi?", pub_date=time)
        self.assertIs(past_question.was_published_recently(), False)   
     
-    # def test_create_question_without_choices(self):
-    #     """
-    #     If the questions hasn't choices it is  deleted.
-    #     """
-    #     question =  Question.objects.create(question_text= "Quien el eso mejor CD de platzi",pub_date=timezone.now(), choices=0)
-    #     if question.choices <= 1:
-    #         question.delete()
-    #         questions_count = len(Question.objects.all())
-    #     self.assertEqual(questions_count, 0)
 
 def create_question(question_text, days):
     """Create a question with the given "question_text", and published the given
@@ -95,15 +85,6 @@ class QuestionIndexTests(TestCase):
             [past_question1,past_question2]
         )
     
-    # def test_two_future_questions(self):
-    #     """
-    #     Two Question with pub_date in the future aren't displayed in the index page
-    #     """
-    #     future_question1 = create_question("Future question1", days= 30)
-    #     future_question2 = create_question("Future question2", days= 40)
-    #     response = self.client.get("polls:index")
-    #     self.assertQuerysetEqual(response.context["latest_question_list"], [])    
-
 class QuestionDetailViewTest(TestCase):
     
     def test_future_question(self):

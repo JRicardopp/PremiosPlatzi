@@ -5,7 +5,7 @@ from . import views
 app_name = "polls"
 urlpatterns = [
     #ex: /polls/
-    path("", views.indexView.as_view(), name="index"), #<int:question_id/> es  la manera que da jango de poder pasar parametros variables metoante la url que nosotros estamos utilizado para una pagina
+    path("", views.indexView.as_view(), name="index"),
     #ex: /polls/5/
     path("<int:pk>/detail/", views.DetailView.as_view(), name="detail"),
     #ex: /polls/5/result
